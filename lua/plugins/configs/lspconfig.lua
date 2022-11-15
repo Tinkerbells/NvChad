@@ -43,6 +43,15 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
+local servers = { "html", "cssls", "clangd", "jsonls", "tsserver", "tailwindcss", "bashls", "prismals" }
+
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+  }
+end
+
 lspconfig.sumneko_lua.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
