@@ -14,7 +14,19 @@ vim.api.nvim_create_autocmd("Filetype", {
 })
 
 local options = {
-  ensure_installed = { "lua-language-server" }, -- not an option from mason.nvim
+  ensure_installed = {
+    -- lua stuff
+    "lua-language-server",
+    "stylua",
+    -- webdev
+    "css-lsp",
+    "typescript-language-server",
+    "tailwindcss-language-server",
+    "prisma-language-server",
+    -- shell
+    "beautysh",
+    "shellcheck",
+  }, -- not an option from mason.nvim
 
   PATH = "skip",
 
