@@ -27,6 +27,12 @@ local options = {
     side = "left",
     width = 25,
     hide_root_folder = true,
+    mappings = {
+      custom_only = false,
+      list = {
+        { key = { "l", "<CR>", "o" }, action = "edit" },
+      },
+    },
   },
   git = {
     enable = false,
