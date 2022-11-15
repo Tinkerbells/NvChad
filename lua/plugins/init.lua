@@ -210,6 +210,15 @@ local plugins = {
       require("core.utils").load_mappings "whichkey"
     end,
   },
+
+  ["ggandor/leap.nvim"] = {
+    config = function()
+      local present, leap = pcall(require, "leap")
+      if present then
+        leap.add_default_mappings()
+      end
+    end,
+  },
 }
 
 -- Load all plugins
