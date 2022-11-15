@@ -31,8 +31,9 @@ M.general = {
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "save file" },
 
-    -- Copy all
+    -- Copy/select all
     ["<C-c>"] = { "<cmd> %y+ <CR>", "copy whole file" },
+    ["<C-a>"] = { "gg<S-v>G <CR>", "select whole file" },
 
     -- line numbers
     ["<leader>n"] = { "<cmd> set nu! <CR>", "toggle line number" },
