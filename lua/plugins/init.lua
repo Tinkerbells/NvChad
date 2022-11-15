@@ -216,6 +216,7 @@ local plugins = {
       local present, leap = pcall(require, "leap")
       if present then
         leap.add_default_mappings()
+        leap.init_highlight(true)
       end
     end,
   },
