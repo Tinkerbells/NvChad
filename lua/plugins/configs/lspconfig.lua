@@ -43,7 +43,7 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
-local servers = { "html", "cssls", "clangd", "jsonls", "tsserver", "tailwindcss", "bashls", "prismals" }
+local servers = { "html", "cssls", "clangd", "jsonls", "tsserver", "tailwindcss", "bashls" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -70,6 +70,24 @@ lspconfig.sumneko_lua.setup {
         preloadFileSize = 10000,
       },
     },
+  },
+}
+
+lspconfig.prismals.setup {
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = true
+    client.server_capabilities.documentRangeFormattingProvider = true
+
+    utils.load_mappings("lspconfig", { buffer = bufnr })
+
+    if client.server_capabilities.signatureHelpProvider then
+      require("nvchad_ui.signature").setup(client)
+    end
+  end,
+  capabilities = M.capabilities,
+
+  settings = {
+    filetypes = { "prisma" },
   },
 }
 
