@@ -8,9 +8,7 @@ local b = null_ls.builtins
 
 local sources = {
 
-  b.formatting.prettier.with {
-    extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-  },
+  b.formatting.prettierd,
   -- Lua
   b.formatting.stylua,
 
