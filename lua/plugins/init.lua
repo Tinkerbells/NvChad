@@ -85,6 +85,7 @@ local plugins = {
     end,
   },
 
+  ["windwp/nvim-ts-autotag"] = {},
   -- git stuff
   ["lewis6991/gitsigns.nvim"] = {
     ft = "gitcommit",
