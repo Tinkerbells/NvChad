@@ -43,7 +43,7 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
-local servers = { "html", "cssls", "clangd", "jsonls", "tsserver", "tailwindcss", "bashls" }
+local servers = { "html", "cssls", "jsonls", "tsserver", "tailwindcss", "bashls" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -51,6 +51,37 @@ for _, lsp in ipairs(servers) do
     capabilities = M.capabilities,
   }
 end
+
+-- disable diagnostics for .env file
+local group = vim.api.nvim_create_augroup("__env", { clear = true })
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = ".env",
+  group = group,
+  callback = function(args)
+    vim.diagnostic.disable(args.buf)
+  end,
+})
+
+lspconfig.sumneko_lua.setup {
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        library = {
+          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+        },
+        maxPreload = 100000,
+        preloadFileSize = 10000,
+      },
+    },
+  },
+}
 
 lspconfig.sumneko_lua.setup {
   on_attach = M.on_attach,
